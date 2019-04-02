@@ -6,15 +6,15 @@
 #include <GL/gl.h>
 
 class Shader {
-   public:
-    Shader(const char* vsPath, const char* fsPath);
+  public:
+    Shader(const char *vsPath, const char *fsPath);
     ~Shader();
 
     void Use();
     GLuint program();
 
-   private:
-    GLuint compileShader(const char* path, GLenum type);
+  private:
+    GLuint compileShader(const char *path, GLenum type);
     GLuint createProgram(GLuint vs, GLuint fs);
     bool checkCompilation(GLuint shader);
 
