@@ -129,16 +129,16 @@ int main() {
             ImGui::Begin("Control");
 
             if (ImGui::CollapsingHeader("Transform")) {
-                ImGui::InputFloat3("Position", &position.x);
-                ImGui::InputFloat3("Rotation", &rotation.x);
-                ImGui::InputFloat3("Scale", &scale.x);
+                ImGui::DragFloat3("Position", &position.x, 0.1f);
+                ImGui::DragFloat3("Rotation", &rotation.x, 0.1f);
+                ImGui::DragFloat3("Scale", &scale.x, 0.1f);
             }
 
             if (ImGui::CollapsingHeader("Camera")) {
-                ImGui::InputFloat3("Camera Position", &camera_pos.x);
-                ImGui::InputFloat("Fov", &fov, 1.0f, 5.0f);
-                ImGui::InputFloat("Near", &near, 0.001f, 0.005f);
-                ImGui::InputFloat("Far", &far, 1.0f, 10.0f);
+                ImGui::DragFloat3("Camera Position", &camera_pos.x, 0.1f);
+                ImGui::DragFloat("Fov", &fov, 1.0f);
+                ImGui::DragFloat("Near", &near, 0.01f);
+                ImGui::DragFloat("Far", &far, 1.0f);
             }
 
             if (ImGui::CollapsingHeader("Texture Selection")) {
