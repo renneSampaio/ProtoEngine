@@ -110,6 +110,15 @@ int main() {
             if (e.type == SDL_QUIT) {
                 running = false;
             }
+            if (e.type == SDL_WINDOWEVENT) {
+                switch (e.window.event) {
+                case SDL_WINDOWEVENT_SIZE_CHANGED:
+                    width = e.window.data1;
+                    height = e.window.data2;
+                    glViewport(0, 0, width, height);
+                    break;
+                }
+            }
         }
 
         ImGui_ImplOpenGL3_NewFrame();
@@ -143,6 +152,8 @@ int main() {
                     current_texture = texture_diagonal;
                 }
             }
+
+            ImGui::ShowDemoWindow();
 
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
                         1000.0f / ImGui::GetIO().Framerate,
@@ -222,8 +233,8 @@ bool init() {
         return false;
     }
 
-    gWindow =
-        SDL_CreateWindow("Demo 01", 0, 0, width, height, SDL_WINDOW_OPENGL);
+    gWindow = SDL_CreateWindow("Demo 01", 0, 0, width, height,
+                               SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 
     if (gWindow == nullptr) {
         std::cout << "Failed to initialize window. Error: " << SDL_GetError()
