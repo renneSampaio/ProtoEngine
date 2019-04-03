@@ -96,6 +96,7 @@ int main() {
     current_texture = texture_diagonal;
 
     uv_offset = glm::vec2(0.0f, 0.0f);
+    uv_scale = glm::vec2(1.0f, 1.0f);
 
     position = glm::vec3(0.0f, 0.0f, 0.0f);
     rotation = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -160,6 +161,44 @@ int main() {
                 if (ImGui::CollapsingHeader("Texture Properties")) {
                     ImGui::DragFloat2("UV Offset", &uv_offset.x, 0.1f);
                     ImGui::DragFloat2("UV Scale", &uv_scale.x, 0.1f);
+
+                    if (ImGui::Button("Linear Filtering")) {
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                                        GL_LINEAR);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                                        GL_LINEAR);
+                    }
+
+                    if (ImGui::Button("Nearest Filtering")) {
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                                        GL_NEAREST);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                                        GL_NEAREST);
+                    }
+                    if (ImGui::Button("Nearest/Nearest Mipmap Filtering")) {
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                                        GL_NEAREST);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                                        GL_NEAREST_MIPMAP_NEAREST);
+                    }
+                    if (ImGui::Button("Nearest/Linear Mipmap Filtering")) {
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                                        GL_NEAREST);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                                        GL_NEAREST_MIPMAP_LINEAR);
+                    }
+                    if (ImGui::Button("Linear/Linear Mipmap Filtering")) {
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                                        GL_NEAREST);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                                        GL_LINEAR_MIPMAP_LINEAR);
+                    }
+                    if (ImGui::Button("Linear/Nearest Mipmap Filtering")) {
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                                        GL_NEAREST);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                                        GL_LINEAR_MIPMAP_NEAREST);
+                    }
                 }
             }
 
