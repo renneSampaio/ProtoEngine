@@ -34,6 +34,9 @@ GLuint texture_abstract;
 GLuint texture_diagonal;
 GLuint current_texture;
 
+glm::vec2 uv_offset;
+glm::vec2 uv_scale;
+
 glm::vec3 position;
 glm::vec3 scale;
 glm::vec3 rotation;
@@ -91,6 +94,8 @@ int main() {
     load_texture("textures/abstract.png", &texture_abstract);
     load_texture("textures/diagonal.png", &texture_diagonal);
     current_texture = texture_diagonal;
+
+    uv_offset = glm::vec2(0.0f, 0.0f);
 
     position = glm::vec3(0.0f, 0.0f, 0.0f);
     rotation = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -151,6 +156,11 @@ int main() {
                 if (ImGui::Button("Texture Diagonal")) {
                     current_texture = texture_diagonal;
                 }
+
+                if (ImGui::CollapsingHeader("Texture Properties")) {
+                    ImGui::DragFloat2("UV Offset", &uv_offset.x, 0.1f);
+                    ImGui::DragFloat2("UV Scale", &uv_scale.x, 0.1f);
+                }
             }
 
             ImGui::ShowDemoWindow();
@@ -185,6 +195,13 @@ int main() {
             glGetUniformLocation(shader.program(), "projection");
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE,
                            glm::value_ptr(projection));
+
+        GLuint uv_offsetLoc =
+            glGetUniformLocation(shader.program(), "uv_offset");
+        glUniform2fv(uv_offsetLoc, 1, glm::value_ptr(uv_offset));
+
+        GLuint uv_scaleLoc = glGetUniformLocation(shader.program(), "uv_scale");
+        glUniform2fv(uv_scaleLoc, 1, glm::value_ptr(uv_scale));
 
         ImGui::Render();
         render(shader);
