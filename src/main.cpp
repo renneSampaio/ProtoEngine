@@ -38,7 +38,14 @@ glm::vec3 position;
 glm::vec3 scale;
 glm::vec3 rotation;
 
+glm::vec3 camera_pos;
+float fov;
+float near;
+float far;
+
 glm::mat4 model;
+glm::mat4 view;
+glm::mat4 projection;
 
 int main() {
     if (!init()) {
@@ -89,6 +96,11 @@ int main() {
     rotation = glm::vec3(0.0f, 0.0f, 0.0f);
     scale = glm::vec3(1.0f, 1.0f, 1.0f);
 
+    camera_pos = glm::vec3(0.0f, 0.0f, 10.0f);
+    fov = 90.0f;
+    near = 0.1f;
+    far = 100.f;
+
     bool running = true;
     SDL_Event e;
     while (running) {
@@ -111,6 +123,13 @@ int main() {
                 ImGui::InputFloat3("Position", &position.x);
                 ImGui::InputFloat3("Rotation", &rotation.x);
                 ImGui::InputFloat3("Scale", &scale.x);
+            }
+
+            if (ImGui::CollapsingHeader("Camera")) {
+                ImGui::InputFloat3("Camera Position", &camera_pos.x);
+                ImGui::InputFloat("Fov", &fov, 1.0f, 5.0f);
+                ImGui::InputFloat("Near", &near, 0.001f, 0.005f);
+                ImGui::InputFloat("Far", &far, 1.0f, 10.0f);
             }
 
             if (ImGui::CollapsingHeader("Texture Selection")) {
@@ -140,8 +159,21 @@ int main() {
         model = glm::scale(model, scale);
         model = glm::translate(model, position);
 
-        GLuint modelTransform = glGetUniformLocation(shader.program(), "model");
-        glUniformMatrix4fv(modelTransform, 1, GL_FALSE, glm::value_ptr(model));
+        view = glm::translate(glm::mat4(1.0f), -camera_pos);
+
+        projection = glm::perspective(glm::radians(fov), (float)width / height,
+                                      near, far);
+
+        GLuint modelLoc = glGetUniformLocation(shader.program(), "model");
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+        GLuint viewLoc = glGetUniformLocation(shader.program(), "view");
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+        GLuint projectionLoc =
+            glGetUniformLocation(shader.program(), "projection");
+        glUniformMatrix4fv(projectionLoc, 1, GL_FALSE,
+                           glm::value_ptr(projection));
 
         ImGui::Render();
         render(shader);
