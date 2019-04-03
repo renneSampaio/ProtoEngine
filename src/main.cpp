@@ -8,6 +8,9 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_sdl.h"
 #include <SOIL/SOIL.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
 bool init();
@@ -31,6 +34,12 @@ GLuint texture_abstract;
 GLuint texture_diagonal;
 GLuint current_texture;
 
+glm::vec3 position;
+glm::vec3 scale;
+glm::vec3 rotation;
+
+glm::mat4 model;
+
 int main() {
     if (!init()) {
         return -1;
@@ -39,10 +48,10 @@ int main() {
     Shader shader("shaders/basic.vert", "shaders/basic.frag");
 
     float vertices[] = {
-        -0.25f, -0.25f, 0.0f, 0.0, 0.0, //..
-        0.25f,  -0.25f, 0.0f, 1.0, 0.0, //..
-        0.25f,  0.25f,  0.0f, 1.0, 1.0, //..
-        -0.25f, 0.25f,  0.0f, 0.0, 1.0, //..
+        -1.0f, -1.0f, 0.0f, 0.0, 0.0, //..
+        1.0f,  -1.0f, 0.0f, 1.0, 0.0, //..
+        1.0f,  1.0f,  0.0f, 1.0, 1.0, //..
+        -1.0f, 1.0f,  0.0f, 0.0, 1.0, //..
     };
 
     uint indices[] = {
@@ -76,6 +85,10 @@ int main() {
     load_texture("textures/diagonal.png", &texture_diagonal);
     current_texture = texture_diagonal;
 
+    position = glm::vec3(0.0f, 0.0f, 0.0f);
+    rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+    scale = glm::vec3(1.0f, 1.0f, 1.0f);
+
     bool running = true;
     SDL_Event e;
     while (running) {
@@ -92,16 +105,24 @@ int main() {
         ImGui::NewFrame();
 
         {
-            ImGui::Begin("Texture Selector");
+            ImGui::Begin("Control");
 
-            if (ImGui::Button("Texture Grunge")) {
-                current_texture = texture_grunge;
+            if (ImGui::CollapsingHeader("Transform")) {
+                ImGui::InputFloat3("Position", &position.x);
+                ImGui::InputFloat3("Rotation", &rotation.x);
+                ImGui::InputFloat3("Scale", &scale.x);
             }
-            if (ImGui::Button("Texture Abstract")) {
-                current_texture = texture_abstract;
-            }
-            if (ImGui::Button("Texture Diagonal")) {
-                current_texture = texture_diagonal;
+
+            if (ImGui::CollapsingHeader("Texture Selection")) {
+                if (ImGui::Button("Texture Grunge")) {
+                    current_texture = texture_grunge;
+                }
+                if (ImGui::Button("Texture Abstract")) {
+                    current_texture = texture_abstract;
+                }
+                if (ImGui::Button("Texture Diagonal")) {
+                    current_texture = texture_diagonal;
+                }
             }
 
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
@@ -109,6 +130,18 @@ int main() {
                         ImGui::GetIO().Framerate);
             ImGui::End();
         }
+
+        model = glm::rotate(glm::mat4(1.0f), glm::radians(rotation.x),
+                            glm::vec3(1.0, 0.0, 0.0));
+        model = glm::rotate(model, glm::radians(rotation.y),
+                            glm::vec3(0.0, 1.0, 0.0));
+        model = glm::rotate(model, glm::radians(rotation.z),
+                            glm::vec3(0.0, 0.0, 1.0));
+        model = glm::scale(model, scale);
+        model = glm::translate(model, position);
+
+        GLuint modelTransform = glGetUniformLocation(shader.program(), "model");
+        glUniformMatrix4fv(modelTransform, 1, GL_FALSE, glm::value_ptr(model));
 
         ImGui::Render();
         render(shader);
@@ -191,7 +224,6 @@ bool init() {
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
-    glEnable(GL_TEXTURE_2D);
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
