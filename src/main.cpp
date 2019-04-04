@@ -121,7 +121,6 @@ int main() {
                 case SDL_WINDOWEVENT_SIZE_CHANGED:
                     width = e.window.data1;
                     height = e.window.data2;
-                    glViewport(0, 0, width, height);
                     break;
                 }
             }
@@ -253,6 +252,8 @@ int main() {
 }
 
 void render(Shader& shader) {
+    glViewport(0, 0, width, height);
+
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
