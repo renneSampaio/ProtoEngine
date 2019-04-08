@@ -222,8 +222,8 @@ int main() {
 
         view = glm::translate(glm::mat4(1.0f), -camera_pos);
 
-        projection = glm::perspective(glm::radians(fov), (float)width / height,
-                                      near, far);
+        projection = glm::perspective(
+            glm::radians(fov), (float)width / std::max(1, height), near, far);
 
         GLuint modelLoc = glGetUniformLocation(shader.program(), "model");
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
