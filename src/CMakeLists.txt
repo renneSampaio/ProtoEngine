@@ -1,4 +1,5 @@
 add_subdirectory(imgui)
+add_subdirectory(ProtoEngine)
 
 add_library(shader Shader.cpp)
 target_link_libraries(shader GLEW GL)

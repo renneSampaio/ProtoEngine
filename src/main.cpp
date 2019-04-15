@@ -68,7 +68,7 @@ int main() {
         0, 1, 2, 2, 3, 0,
     };
 
-    shader.Use();
+    // shader.Use();
 
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
@@ -89,6 +89,8 @@ int main() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
                  GL_STATIC_DRAW);
+
+    glBindVertexArray(0);
 
     load_texture("textures/grunge.png", &texture_grunge);
     load_texture("textures/abstract.png", &texture_abstract);
