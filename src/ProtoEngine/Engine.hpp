@@ -12,14 +12,14 @@ class Camera;
 
 class Engine {
   private:
-    static Engine* instance;
+    static Engine* _instance;
 
     Engine(std::string title, int x, int y, int width, int height);
 
   public:
-    Node* root;
-    Camera* camera;
-    Window* main_window;
+    Node* _root;
+    Camera* _camera;
+    Window* _main_window;
 
     static void init(std::string title, int x, int y, int width, int height);
     static void quit();

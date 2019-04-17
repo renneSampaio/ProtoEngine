@@ -10,7 +10,7 @@
 #include "Window.hpp"
 
 namespace ProtoEngine {
-Engine* Engine::instance = nullptr;
+Engine* Engine::_instance = nullptr;
 
 Engine::Engine(std::string title, int x, int y, int width, int height) {
     auto sdl_init_status = SDL_Init(SDL_INIT_EVERYTHING);
@@ -19,7 +19,7 @@ Engine::Engine(std::string title, int x, int y, int width, int height) {
                   << "\n";
     }
 
-    main_window = new Window{title, x, y, width, height};
+    _main_window = new Window{title, x, y, width, height};
 
     glewExperimental = GL_TRUE;
     GLenum glew_status = glewInit();
@@ -34,31 +34,31 @@ Engine::Engine(std::string title, int x, int y, int width, int height) {
     glEnable(GL_BLEND);
 }
 
-Engine::~Engine() { delete main_window; }
+Engine::~Engine() { delete _main_window; }
 
 void Engine::init(std::string title, int x, int y, int width, int height) {
-    if (!instance) {
-        instance = new Engine(title, x, y, width, height);
+    if (!_instance) {
+        _instance = new Engine(title, x, y, width, height);
     }
 }
 
-Engine* Engine::getInstance() { return instance; }
+Engine* Engine::getInstance() { return _instance; }
 
 void Engine::render() {
-    glViewport(0, 0, main_window->getWidth(), main_window->getHeight());
+    glViewport(0, 0, _main_window->getWidth(), _main_window->getHeight());
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (!root)
+    if (!_root)
         return;
 
-    if (!camera)
+    if (!_camera)
         return;
 
-    root->render(*camera);
+    _root->render(*_camera);
 
-    main_window->update();
+    _main_window->update();
 }
 
 void Engine::quit() { SDL_Quit(); }

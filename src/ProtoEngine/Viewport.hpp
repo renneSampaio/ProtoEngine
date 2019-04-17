@@ -7,33 +7,33 @@ namespace ProtoEngine {
 
 class Viewport {
   private:
-    int x, y;
-    int width, height;
-    int aspect;
+    int _x, _y;
+    int _width, _height;
+    int _aspect;
 
-    inline void update_aspect_ratio() {
-        this->aspect = width / std::max(1, height);
+    inline void updateAspectRatio() {
+        this->_aspect = _width / std::max(1, _height);
     }
 
   public:
-    Viewport(int width, int height);
+    Viewport(int _width, int _height);
     Viewport(int x, int y, int width, int height);
 
     void apply();
 
     inline void setHeight(int new_height) {
-        this->height = new_height;
-        update_aspect_ratio();
+        this->_height = new_height;
+        updateAspectRatio();
     }
 
     inline void setWidth(int new_width) {
-        this->width = new_width;
-        update_aspect_ratio();
+        this->_width = new_width;
+        updateAspectRatio();
     }
 
-    inline int getWidth() const { return this->width; }
-    inline int getHeight() const { return this->height; }
-    inline int getAspect() const { return this->aspect; }
+    inline int getWidth() const { return this->_width; }
+    inline int getHeight() const { return this->_height; }
+    inline int getAspect() const { return this->_aspect; }
 };
 
 } // namespace ProtoEngine

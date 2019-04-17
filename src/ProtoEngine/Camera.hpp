@@ -9,10 +9,10 @@ namespace ProtoEngine {
 
 class Camera : public Component {
   public:
-    float near;
-    float far;
-    float aspect;
-    float fovy;
+    float _near;
+    float _far;
+    float _aspect;
+    float _fovy;
 
     Camera(float near, float far, float aspect, float fovy);
 

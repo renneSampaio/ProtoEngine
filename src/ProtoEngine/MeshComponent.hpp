@@ -20,15 +20,15 @@ struct Vertex {
 class MeshComponent : public Component {
 
   private:
-    GLenum vao;
-    GLenum vbo;
-    GLenum ebo;
+    GLenum _vao;
+    GLenum _vbo;
+    GLenum _ebo;
 
   public:
-    MeshComponent(std::vector<Vertex> mesh, std::vector<uint> indices);
+    MeshComponent(std::vector<Vertex> _mesh, std::vector<uint> _indices);
 
-    std::vector<Vertex> mesh;
-    std::vector<uint> indices;
+    std::vector<Vertex> _mesh;
+    std::vector<uint> _indices;
 
     void update() override;
     void render() override;

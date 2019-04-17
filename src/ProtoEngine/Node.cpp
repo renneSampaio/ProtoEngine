@@ -9,57 +9,57 @@
 
 namespace ProtoEngine {
 
-Node::Node() : parent(nullptr) {}
-Node::Node(Node* parent) : parent(parent) {}
+Node::Node() : _parent(nullptr) {}
+Node::Node(Node* parent) : _parent(parent) {}
 
 glm::mat4 Node::getModel() {
     glm::mat4 model = glm::mat4(1.0f);
 
-    model = glm::translate(model, position);
+    model = glm::translate(model, _position);
     model =
-        glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0, 0.0, 0.0));
+        glm::rotate(model, glm::radians(_rotation.x), glm::vec3(1.0, 0.0, 0.0));
     model =
-        glm::rotate(model, glm::radians(rotation.y), glm::vec3(0.0, 1.0, 0.0));
+        glm::rotate(model, glm::radians(_rotation.y), glm::vec3(0.0, 1.0, 0.0));
     model =
-        glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0, 0.0, 1.0));
-    model = glm::scale(model, scale);
+        glm::rotate(model, glm::radians(_rotation.z), glm::vec3(0.0, 0.0, 1.0));
+    model = glm::scale(model, _scale);
 
-    if (parent != nullptr) {
-        return parent->getModel() * model;
+    if (_parent != nullptr) {
+        return _parent->getModel() * model;
     }
 
     return model;
 }
 
-void Node::addChild(Node* child) { children.push_back(child); }
+void Node::addChild(Node* child) { _children.push_back(child); }
 
 void Node::addComponent(Component* component) {
     component->setNode(this);
-    components.push_back(component);
+    _components.push_back(component);
 }
 
 void Node::setShader(std::string vs_path, std::string fs_path) {
-    shader = new Shader(vs_path.c_str(), fs_path.c_str());
+    _shader = new Shader(vs_path.c_str(), fs_path.c_str());
 }
 
 void Node::render(Camera& camera) {
-    shader->Use();
-    GLuint modelLoc = glGetUniformLocation(shader->program(), "model");
+    _shader->Use();
+    GLuint modelLoc = glGetUniformLocation(_shader->program(), "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(getModel()));
 
-    GLuint viewLoc = glGetUniformLocation(shader->program(), "view");
+    GLuint viewLoc = glGetUniformLocation(_shader->program(), "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera.getView()));
 
     GLuint projectionLoc =
-        glGetUniformLocation(shader->program(), "projection");
+        glGetUniformLocation(_shader->program(), "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE,
                        glm::value_ptr(camera.getProjection()));
 
-    for (auto& comp : components) {
+    for (auto& comp : _components) {
         comp->render();
     }
 
-    for (auto& child : children) {
+    for (auto& child : _children) {
         child->render(camera);
     }
 }

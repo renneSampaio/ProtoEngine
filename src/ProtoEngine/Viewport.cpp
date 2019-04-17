@@ -8,10 +8,10 @@ namespace ProtoEngine {
 
 Viewport::Viewport(int width, int height) : Viewport(0, 0, width, height){};
 Viewport::Viewport(int x, int y, int width, int height)
-    : x(x), y(y), width(width), height(height) {}
+    : _x(x), _y(y), _width(width), _height(height) {}
 
 void Viewport::apply() {
-    glViewport(this->x, this->y, this->width, this->height);
+    glViewport(this->_x, this->_y, this->_width, this->_height);
 }
 
 } // namespace ProtoEngine

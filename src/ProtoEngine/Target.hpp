@@ -12,7 +12,7 @@ class Target {
     std::vector<Viewport*> viewports;
 
   public:
-    void add_viewport(Viewport* viewport) { viewports.push_back(viewport); }
+    void addViewport(Viewport* viewport) { viewports.push_back(viewport); }
 
     std::vector<Viewport*>::const_iterator viewportsBegin() {
         return viewports.cbegin();

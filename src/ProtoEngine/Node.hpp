@@ -15,15 +15,15 @@ class Component;
 
 class Node {
   public:
-    glm::vec3 position;
-    glm::vec3 rotation;
-    glm::vec3 scale = glm::vec3(1.0f);
+    glm::vec3 _position;
+    glm::vec3 _rotation;
+    glm::vec3 _scale = glm::vec3(1.0f);
 
-    Node* parent = nullptr;
-    std::vector<Node*> children;
-    std::vector<Component*> components;
+    Node* _parent = nullptr;
+    std::vector<Node*> _children;
+    std::vector<Component*> _components;
 
-    Shader* shader;
+    Shader* _shader;
 
     Node();
     Node(Node* parent);

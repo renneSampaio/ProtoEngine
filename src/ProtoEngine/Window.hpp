@@ -10,9 +10,9 @@ namespace ProtoEngine {
 
 class Window : public Target {
   private:
-    std::string title;
-    SDL_Window* window;
-    SDL_GLContext context_id;
+    std::string _title;
+    SDL_Window* _window;
+    SDL_GLContext _contextId;
 
   public:
     Window();

@@ -6,20 +6,20 @@ namespace ProtoEngine {
 
 MeshComponent::MeshComponent(std::vector<Vertex> mesh,
                              std::vector<uint> indices) {
-    this->mesh = mesh;
-    this->indices = indices;
+    this->_mesh = mesh;
+    this->_indices = indices;
 
-    std::cout << this->mesh.size();
-    std::cout << this->indices.size();
+    std::cout << this->_mesh.size();
+    std::cout << this->_indices.size();
 
-    glGenVertexArrays(1, &vao);
-    glGenBuffers(1, &vbo);
-    glGenBuffers(1, &ebo);
+    glGenVertexArrays(1, &_vao);
+    glGenBuffers(1, &_vbo);
+    glGenBuffers(1, &_ebo);
 
-    glBindVertexArray(vao);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindVertexArray(_vao);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mesh.size(),
-                 &(this->mesh[0]), GL_STATIC_DRAW);
+                 &(this->_mesh[0]), GL_STATIC_DRAW);
 
     // Vertex positions
     glEnableVertexAttribArray(0);
@@ -29,7 +29,7 @@ MeshComponent::MeshComponent(std::vector<Vertex> mesh,
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
                           (void*)(sizeof(glm::vec3)));
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * indices.size(),
                  &indices[0], GL_STATIC_DRAW);
 
@@ -40,8 +40,8 @@ void MeshComponent::update() {}
 
 void MeshComponent::render() {
     std::cout << "Rendering mesh\n";
-    glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
+    glBindVertexArray(_vao);
+    glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, nullptr);
 }
 
 } // namespace ProtoEngine
