@@ -31,7 +31,10 @@ glm::mat4 Node::getModel() {
     return model;
 }
 
-void Node::addChild(Node* child) { _children.push_back(child); }
+void Node::addChild(Node* child) {
+    child->setParent(this);
+    _children.push_back(child);
+}
 
 void Node::addComponent(Component* component) {
     component->setNode(this);
