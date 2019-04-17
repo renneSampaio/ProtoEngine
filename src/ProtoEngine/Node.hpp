@@ -28,12 +28,12 @@ class Node {
     Node();
     Node(Node* parent);
 
-    glm::mat4 get_model();
+    glm::mat4 getModel();
 
-    void add_child(Node* child);
-    void add_component(Component* component);
+    void addChild(Node* child);
+    void addComponent(Component* component);
 
-    void set_shader(std::string vs_path, std::string fs_path);
+    void setShader(std::string vs_path, std::string fs_path);
 
     void render(Camera& camera);
 };

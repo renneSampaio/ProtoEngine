@@ -42,10 +42,10 @@ void Engine::init(std::string title, int x, int y, int width, int height) {
     }
 }
 
-Engine* Engine::get_instance() { return instance; }
+Engine* Engine::getInstance() { return instance; }
 
 void Engine::render() {
-    glViewport(0, 0, main_window->get_width(), main_window->get_height());
+    glViewport(0, 0, main_window->getWidth(), main_window->getHeight());
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

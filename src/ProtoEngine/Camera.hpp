@@ -16,8 +16,8 @@ class Camera : public Component {
 
     Camera(float near, float far, float aspect, float fovy);
 
-    glm::mat4 get_projection();
-    glm::mat4 get_view();
+    glm::mat4 getProjection();
+    glm::mat4 getView();
 
     void update() override{};
     void render() override{};

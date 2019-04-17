@@ -13,7 +13,7 @@ class Component {
     virtual void update() = 0;
     virtual void render() = 0;
 
-    void set_node(Node* node) { this->node = node; }
+    void setNode(Node* node) { this->node = node; }
 };
 
 } // namespace ProtoEngine

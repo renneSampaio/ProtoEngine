@@ -21,19 +21,19 @@ class Viewport {
 
     void apply();
 
-    inline void set_height(int new_height) {
+    inline void setHeight(int new_height) {
         this->height = new_height;
         update_aspect_ratio();
     }
 
-    inline void set_width(int new_width) {
+    inline void setWidth(int new_width) {
         this->width = new_width;
         update_aspect_ratio();
     }
 
-    inline int get_width() const { return this->width; }
-    inline int get_height() const { return this->height; }
-    inline int get_aspect() const { return this->aspect; }
+    inline int getWidth() const { return this->width; }
+    inline int getHeight() const { return this->height; }
+    inline int getAspect() const { return this->aspect; }
 };
 
 } // namespace ProtoEngine

@@ -14,15 +14,15 @@ class Target {
   public:
     void add_viewport(Viewport* viewport) { viewports.push_back(viewport); }
 
-    std::vector<Viewport*>::const_iterator viewports_begin() {
+    std::vector<Viewport*>::const_iterator viewportsBegin() {
         return viewports.cbegin();
     }
 
-    std::vector<Viewport*>::const_iterator viewports_end() {
+    std::vector<Viewport*>::const_iterator viewportsEnd() {
         return viewports.cend();
     }
 
-    virtual void make_current() = 0;
+    virtual void makeCurrent() = 0;
 
     virtual ~Target(){};
 };

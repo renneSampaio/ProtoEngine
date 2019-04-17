@@ -24,7 +24,7 @@ class Engine {
     static void init(std::string title, int x, int y, int width, int height);
     static void quit();
 
-    static Engine* get_instance();
+    static Engine* getInstance();
 
     void render();
 

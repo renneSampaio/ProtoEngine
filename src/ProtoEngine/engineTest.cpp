@@ -10,7 +10,7 @@ using namespace ProtoEngine;
 int main() {
     Engine::init("Teste", 0, 0, 400, 400);
 
-    auto engine = ProtoEngine::Engine::get_instance();
+    auto engine = ProtoEngine::Engine::getInstance();
 
     std::vector<Vertex> mesh{
         {glm::vec3(-1.0f, -1.0f, 0.0f), glm::vec2(0.0, 0.0)}, //..
@@ -24,19 +24,19 @@ int main() {
 
     MeshComponent* mesh_component = new MeshComponent(mesh, indices);
 
-    Camera cam(0.01f, 100.0f, engine->main_window->get_aspect_ratio(), 90.0f);
+    Camera cam(0.01f, 100.0f, engine->main_window->getAspectRatio(), 90.0f);
 
     Node root;
-    root.add_component(&cam);
-    root.set_shader("shaders/test.vert", "shaders/test.frag");
+    root.addComponent(&cam);
+    root.setShader("shaders/test.vert", "shaders/test.frag");
 
     Node quad;
-    quad.add_component(mesh_component);
-    quad.set_shader("shaders/test.vert", "shaders/test.frag");
+    quad.addComponent(mesh_component);
+    quad.setShader("shaders/test.vert", "shaders/test.frag");
     quad.position.z = 10.f;
     quad.scale = glm::vec3(10.0f);
 
-    root.add_child(&quad);
+    root.addChild(&quad);
 
     engine->root = &root;
     engine->camera = &cam;

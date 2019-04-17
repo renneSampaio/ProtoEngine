@@ -34,22 +34,22 @@ Window::~Window() {
     SDL_DestroyWindow(window);
 }
 
-int Window::get_width() const { return viewports[0]->get_width(); }
-int Window::get_height() const { return viewports[0]->get_height(); };
-int Window::get_aspect_ratio() const { return viewports[0]->get_aspect(); };
+int Window::getWidth() const { return viewports[0]->getWidth(); }
+int Window::getHeight() const { return viewports[0]->getHeight(); };
+int Window::getAspectRatio() const { return viewports[0]->getAspect(); };
 
-void Window::set_width(int new_width) { viewports[0]->set_width(new_width); }
+void Window::setWidth(int new_width) { viewports[0]->setWidth(new_width); }
 
-void Window::set_height(int new_height) {
-    viewports[0]->set_height(new_height);
+void Window::setHeight(int new_height) {
+    viewports[0]->setHeight(new_height);
 }
 
-void Window::set_dimension(int new_width, int new_height) {
-    viewports[0]->set_width(new_width);
-    viewports[0]->set_height(new_height);
+void Window::setDimension(int new_width, int new_height) {
+    viewports[0]->setWidth(new_width);
+    viewports[0]->setHeight(new_height);
 }
 
-void Window::make_current() {
+void Window::makeCurrent() {
     SDL_GL_MakeCurrent(this->window, this->context_id);
 }
 

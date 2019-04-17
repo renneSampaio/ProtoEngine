@@ -20,15 +20,15 @@ class Window : public Target {
     Window(std::string title, int width, int height);
     ~Window();
 
-    int get_width() const;
-    int get_height() const;
-    int get_aspect_ratio() const;
+    int getWidth() const;
+    int getHeight() const;
+    int getAspectRatio() const;
 
-    void set_width(int new_width);
-    void set_height(int new_height);
-    void set_dimension(int new_width, int new_height);
+    void setWidth(int new_width);
+    void setHeight(int new_height);
+    void setDimension(int new_width, int new_height);
 
-    void make_current() override;
+    void makeCurrent() override;
     void update();
 };
 
