@@ -12,15 +12,7 @@ class Camera;
 
 class Engine {
   private:
-    static Engine* _instance;
-
-    Engine(std::string title, int x, int y, int width, int height);
-
   public:
-    Node* _root;
-    Camera* _camera;
-    Window* _main_window;
-
     static void init(std::string title, int x, int y, int width, int height);
     static void quit();
 
@@ -29,6 +21,26 @@ class Engine {
     void render();
 
     ~Engine();
+
+    Node* getRoot() const;
+    void setRoot(Node* root);
+
+    Camera* getCamera() const;
+    void setCamera(Camera* camera);
+
+    Window* getMainWindow() const;
+    void setMainWindow(Window* main_window);
+
+    void mainLoop();
+
+  private:
+    Engine(std::string title, int x, int y, int width, int height);
+
+    static Engine* _instance;
+
+    Node* _root;
+    Camera* _camera;
+    Window* _main_window;
 };
 
 } // namespace ProtoEngine

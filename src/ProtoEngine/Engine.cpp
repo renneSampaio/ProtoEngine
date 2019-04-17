@@ -36,6 +36,18 @@ Engine::Engine(std::string title, int x, int y, int width, int height) {
 
 Engine::~Engine() { delete _main_window; }
 
+Node* Engine::getRoot() const { return _root; }
+
+void Engine::setRoot(Node* root) { _root = root; }
+
+Camera* Engine::getCamera() const { return _camera; }
+
+void Engine::setCamera(Camera* camera) { _camera = camera; }
+
+Window* Engine::getMainWindow() const { return _main_window; }
+
+void Engine::setMainWindow(Window* main_window) { _main_window = main_window; }
+
 void Engine::init(std::string title, int x, int y, int width, int height) {
     if (!_instance) {
         _instance = new Engine(title, x, y, width, height);
@@ -59,6 +71,22 @@ void Engine::render() {
     _root->render(*_camera);
 
     _main_window->update();
+}
+
+void Engine::mainLoop() {
+
+    bool running = true;
+    SDL_Event e;
+    while (running) {
+        while (SDL_PollEvent(&e) != 0) {
+
+            if (e.type == SDL_QUIT) {
+                running = false;
+            }
+        }
+        render();
+    }
+    quit();
 }
 
 void Engine::quit() { SDL_Quit(); }

@@ -64,4 +64,38 @@ void Node::render(Camera& camera) {
     }
 }
 
+glm::vec3 Node::getPosition() const { return _position; }
+
+void Node::setPosition(const glm::vec3& position) { _position = position; }
+
+void Node::setPosition(float x, float y, float z) {
+    _position.x = x;
+    _position.y = y;
+    _position.z = z;
+}
+
+glm::vec3 Node::getRotation() const { return _rotation; }
+
+void Node::setRotation(const glm::vec3& rotation) { _rotation = rotation; }
+
+void Node::setRotation(float x, float y, float z) {
+    _rotation.x = x;
+    _rotation.y = y;
+    _rotation.z = z;
+}
+
+glm::vec3 Node::getScale() const { return _scale; }
+
+void Node::setScale(const glm::vec3& scale) { _scale = scale; }
+
+void Node::setScale(float x, float y, float z) {
+    _scale.x = x;
+    _scale.y = y;
+    _scale.z = z;
+}
+
+Node* Node::getParent() const { return _parent; }
+
+void Node::setParent(Node* parent) { _parent = parent; }
+
 } // namespace ProtoEngine

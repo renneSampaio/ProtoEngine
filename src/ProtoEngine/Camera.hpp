@@ -9,11 +9,6 @@ namespace ProtoEngine {
 
 class Camera : public Component {
   public:
-    float _near;
-    float _far;
-    float _aspect;
-    float _fovy;
-
     Camera(float near, float far, float aspect, float fovy);
 
     glm::mat4 getProjection();
@@ -21,6 +16,24 @@ class Camera : public Component {
 
     void update() override{};
     void render() override{};
+
+    float getNear() const;
+    void setNear(float near);
+
+    float getFar() const;
+    void setFar(float far);
+
+    float getAspect() const;
+    void setAspect(float aspect);
+
+    float getFovy() const;
+    void setFovy(float fovy);
+
+  private:
+    float _near;
+    float _far;
+    float _aspect;
+    float _fovy;
 };
 
 } // namespace ProtoEngine

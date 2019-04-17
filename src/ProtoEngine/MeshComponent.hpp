@@ -18,12 +18,6 @@ struct Vertex {
 };
 
 class MeshComponent : public Component {
-
-  private:
-    GLenum _vao;
-    GLenum _vbo;
-    GLenum _ebo;
-
   public:
     MeshComponent(std::vector<Vertex> _mesh, std::vector<uint> _indices);
 
@@ -32,6 +26,11 @@ class MeshComponent : public Component {
 
     void update() override;
     void render() override;
+
+  private:
+    GLenum _vao;
+    GLenum _vbo;
+    GLenum _ebo;
 };
 
 } // namespace ProtoEngine

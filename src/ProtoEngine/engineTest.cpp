@@ -24,7 +24,7 @@ int main() {
 
     MeshComponent* mesh_component = new MeshComponent(mesh, indices);
 
-    Camera cam(0.01f, 100.0f, engine->_main_window->getAspectRatio(), 90.0f);
+    Camera cam(0.01f, 100.0f, engine->getMainWindow()->getAspectRatio(), 90.0f);
 
     Node root;
     root.addComponent(&cam);
@@ -33,24 +33,12 @@ int main() {
     Node quad;
     quad.addComponent(mesh_component);
     quad.setShader("shaders/test.vert", "shaders/test.frag");
-    quad._position.z = 10.f;
-    quad._scale = glm::vec3(10.0f);
+    quad.setPosition(0, 0, 10);
 
     root.addChild(&quad);
 
-    engine->_root = &root;
-    engine->_camera = &cam;
+    engine->setRoot(&root);
+    engine->setCamera(&cam);
 
-    bool running = true;
-    SDL_Event e;
-    while (running) {
-        while (SDL_PollEvent(&e) != 0) {
-
-            if (e.type == SDL_QUIT) {
-                running = false;
-            }
-        }
-        engine->render();
-    }
-    engine->quit();
+    engine->mainLoop();
 }

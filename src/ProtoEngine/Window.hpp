@@ -9,11 +9,6 @@
 namespace ProtoEngine {
 
 class Window : public Target {
-  private:
-    std::string _title;
-    SDL_Window* _window;
-    SDL_GLContext _contextId;
-
   public:
     Window();
     Window(std::string title, int x, int y, int width, int height);
@@ -30,6 +25,11 @@ class Window : public Target {
 
     void makeCurrent() override;
     void update();
+
+  private:
+    std::string _title;
+    SDL_Window* _window;
+    SDL_GLContext _contextId;
 };
 
 } // namespace ProtoEngine
