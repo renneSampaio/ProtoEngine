@@ -43,9 +43,13 @@ class Node {
     void setParent(Node* parent);
 
   private:
-    glm::vec3 _position;
-    glm::vec3 _rotation;
+    void calcModel();
+
+    glm::vec3 _position = glm::vec3(0.0);
+    glm::vec3 _rotation = glm::vec3(0.0);
     glm::vec3 _scale = glm::vec3(1.0f);
+
+    glm::mat4 _model;
 
     Node* _parent = nullptr;
     std::vector<Node*> _children;

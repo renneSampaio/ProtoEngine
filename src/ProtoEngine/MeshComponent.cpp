@@ -39,7 +39,6 @@ MeshComponent::MeshComponent(std::vector<Vertex> mesh,
 void MeshComponent::update() {}
 
 void MeshComponent::render() {
-    std::cout << "Rendering mesh\n";
     glBindVertexArray(_vao);
     glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, nullptr);
 }

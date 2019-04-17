@@ -7,9 +7,13 @@
 
 namespace Proto {
 
+class Shader;
+
 class Camera : public Component {
   public:
     Camera(float near, float far, float aspect, float fovy);
+
+    void setUniforms(Shader* shader);
 
     glm::mat4 getProjection();
     glm::mat4 getView();
@@ -30,10 +34,16 @@ class Camera : public Component {
     void setFovy(float fovy);
 
   private:
+    void calcProjection();
+    void calcView();
+
     float _near;
     float _far;
     float _aspect;
     float _fovy;
+
+    glm::mat4 _view;
+    glm::mat4 _projection;
 };
 
 } // namespace Proto

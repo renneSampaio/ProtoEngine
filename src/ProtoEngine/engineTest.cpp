@@ -28,12 +28,14 @@ int main() {
 
     Node root;
     root.addComponent(&cam);
+
+    Node camera;
     root.setShader("shaders/test.vert", "shaders/test.frag");
 
     Node quad;
     quad.addComponent(mesh_component);
     quad.setShader("shaders/test.vert", "shaders/test.frag");
-    quad.setPosition(0, 0, 10);
+    quad.setPosition(0.0f, 0.0f, 10.0f);
 
     root.addChild(&quad);
 

@@ -10,25 +10,11 @@
 namespace Proto {
 
 Node::Node() : _parent(nullptr) {}
-Node::Node(Node* parent) : _parent(parent) {}
+Node::Node(Node* parent) : _parent(parent) { _parent->addChild(this); }
 
 glm::mat4 Node::getModel() {
-    glm::mat4 model = glm::mat4(1.0f);
-
-    model = glm::translate(model, _position);
-    model =
-        glm::rotate(model, glm::radians(_rotation.x), glm::vec3(1.0, 0.0, 0.0));
-    model =
-        glm::rotate(model, glm::radians(_rotation.y), glm::vec3(0.0, 1.0, 0.0));
-    model =
-        glm::rotate(model, glm::radians(_rotation.z), glm::vec3(0.0, 0.0, 1.0));
-    model = glm::scale(model, _scale);
-
-    if (_parent != nullptr) {
-        return _parent->getModel() * model;
-    }
-
-    return model;
+    calcModel();
+    return _model;
 }
 
 void Node::addChild(Node* child) {
@@ -47,16 +33,12 @@ void Node::setShader(std::string vs_path, std::string fs_path) {
 
 void Node::render(Camera& camera) {
     _shader->Use();
+
+    calcModel();
     GLuint modelLoc = glGetUniformLocation(_shader->program(), "model");
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(getModel()));
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(_model));
 
-    GLuint viewLoc = glGetUniformLocation(_shader->program(), "view");
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera.getView()));
-
-    GLuint projectionLoc =
-        glGetUniformLocation(_shader->program(), "projection");
-    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE,
-                       glm::value_ptr(camera.getProjection()));
+    camera.setUniforms(_shader);
 
     for (auto& comp : _components) {
         comp->render();
@@ -100,5 +82,22 @@ void Node::setScale(float x, float y, float z) {
 Node* Node::getParent() const { return _parent; }
 
 void Node::setParent(Node* parent) { _parent = parent; }
+
+void Node::calcModel() {
+    _model = glm::mat4(1.0f);
+
+    _model = glm::translate(_model, _position);
+    _model = glm::rotate(_model, glm::radians(_rotation.x),
+                         glm::vec3(1.0, 0.0, 0.0));
+    _model = glm::rotate(_model, glm::radians(_rotation.y),
+                         glm::vec3(0.0, 1.0, 0.0));
+    _model = glm::rotate(_model, glm::radians(_rotation.z),
+                         glm::vec3(0.0, 0.0, 1.0));
+    _model = glm::scale(_model, _scale);
+
+    if (_parent != nullptr) {
+        _model = _parent->getModel() * _model;
+    }
+}
 
 } // namespace Proto
