@@ -2,7 +2,7 @@
 
 #include "Window.hpp"
 
-namespace ProtoEngine {
+namespace Proto {
 
 Window::Window(std::string title, int x, int y, int width, int height) {
     this->_window =
@@ -40,9 +40,7 @@ int Window::getAspectRatio() const { return viewports[0]->getAspect(); };
 
 void Window::setWidth(int new_width) { viewports[0]->setWidth(new_width); }
 
-void Window::setHeight(int new_height) {
-    viewports[0]->setHeight(new_height);
-}
+void Window::setHeight(int new_height) { viewports[0]->setHeight(new_height); }
 
 void Window::setDimension(int new_width, int new_height) {
     viewports[0]->setWidth(new_width);
@@ -55,4 +53,4 @@ void Window::makeCurrent() {
 
 void Window::update() { SDL_GL_SwapWindow(_window); }
 
-} // namespace ProtoEngine
+} // namespace Proto

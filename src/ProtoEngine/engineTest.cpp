@@ -5,12 +5,12 @@
 
 #include "SDL2/SDL.h"
 
-using namespace ProtoEngine;
+using namespace Proto;
 
 int main() {
     Engine::init("Teste", 0, 0, 400, 400);
 
-    auto engine = ProtoEngine::Engine::getInstance();
+    auto engine = Proto::Engine::getInstance();
 
     std::vector<Vertex> mesh{
         {glm::vec3(-1.0f, -1.0f, 0.0f), glm::vec2(0.0, 0.0)}, //..

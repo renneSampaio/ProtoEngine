@@ -6,7 +6,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 
-namespace ProtoEngine {
+namespace Proto {
 
 class Window : public Target {
   public:
@@ -32,6 +32,6 @@ class Window : public Target {
     SDL_GLContext _contextId;
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif

@@ -3,7 +3,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace ProtoEngine {
+namespace Proto {
 
 Camera::Camera(float near, float far, float aspect, float fovy)
     : _near(near), _far(far), _aspect(aspect), _fovy(fovy) {}
@@ -32,4 +32,4 @@ float Camera::getFovy() const { return _fovy; }
 
 void Camera::setFovy(float fovy) { _fovy = fovy; }
 
-} // namespace ProtoEngine
+} // namespace Proto

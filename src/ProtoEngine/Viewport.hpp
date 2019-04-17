@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-namespace ProtoEngine {
+namespace Proto {
 
 class Viewport {
   public:
@@ -36,6 +36,6 @@ class Viewport {
     }
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif

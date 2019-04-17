@@ -4,7 +4,7 @@
 
 #include "Viewport.hpp"
 
-namespace ProtoEngine {
+namespace Proto {
 
 Viewport::Viewport(int width, int height) : Viewport(0, 0, width, height){};
 Viewport::Viewport(int x, int y, int width, int height)
@@ -14,4 +14,4 @@ void Viewport::apply() {
     glViewport(this->_x, this->_y, this->_width, this->_height);
 }
 
-} // namespace ProtoEngine
+} // namespace Proto

@@ -5,7 +5,7 @@
 
 #include <GL/gl.h>
 
-namespace ProtoEngine {
+namespace Proto {
 
 class Shader {
   public:
@@ -23,6 +23,6 @@ class Shader {
     GLuint _program;
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif

@@ -9,7 +9,7 @@
 #include "Node.hpp"
 #include "Window.hpp"
 
-namespace ProtoEngine {
+namespace Proto {
 Engine* Engine::_instance = nullptr;
 
 Engine::Engine(std::string title, int x, int y, int width, int height) {
@@ -91,4 +91,4 @@ void Engine::mainLoop() {
 
 void Engine::quit() { SDL_Quit(); }
 
-} // namespace ProtoEngine
+} // namespace Proto

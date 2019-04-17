@@ -7,7 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace ProtoEngine {
+namespace Proto {
 
 Node::Node() : _parent(nullptr) {}
 Node::Node(Node* parent) : _parent(parent) {}
@@ -98,4 +98,4 @@ Node* Node::getParent() const { return _parent; }
 
 void Node::setParent(Node* parent) { _parent = parent; }
 
-} // namespace ProtoEngine
+} // namespace Proto

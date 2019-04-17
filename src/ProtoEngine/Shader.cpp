@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace ProtoEngine {
+namespace Proto {
 
 Shader::Shader(const char* vsPath, const char* fsPath) {
     GLuint vs = compileShader(vsPath, GL_VERTEX_SHADER);
@@ -74,4 +74,4 @@ void Shader::Use() { glUseProgram(_program); }
 
 GLuint Shader::program() { return this->_program; }
 
-} // namespace ProtoEngine
+} // namespace Proto

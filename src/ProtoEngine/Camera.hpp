@@ -5,7 +5,7 @@
 
 #include "Component.hpp"
 
-namespace ProtoEngine {
+namespace Proto {
 
 class Camera : public Component {
   public:
@@ -36,6 +36,6 @@ class Camera : public Component {
     float _fovy;
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif

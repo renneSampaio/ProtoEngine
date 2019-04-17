@@ -1,7 +1,7 @@
 #ifndef COMPONENT_HEADER_
 #define COMPONENT_HEADER_
 
-namespace ProtoEngine {
+namespace Proto {
 
 class Node;
 
@@ -17,6 +17,6 @@ class Component {
     Node* _node;
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif

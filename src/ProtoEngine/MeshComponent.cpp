@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace ProtoEngine {
+namespace Proto {
 
 MeshComponent::MeshComponent(std::vector<Vertex> mesh,
                              std::vector<uint> indices) {
@@ -44,4 +44,4 @@ void MeshComponent::render() {
     glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, nullptr);
 }
 
-} // namespace ProtoEngine
+} // namespace Proto

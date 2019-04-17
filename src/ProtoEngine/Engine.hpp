@@ -5,7 +5,7 @@
 
 #include "Window.hpp"
 
-namespace ProtoEngine {
+namespace Proto {
 
 class Node;
 class Camera;
@@ -43,6 +43,6 @@ class Engine {
     Window* _main_window;
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif

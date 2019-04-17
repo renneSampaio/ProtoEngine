@@ -10,7 +10,7 @@
 
 #include "Component.hpp"
 
-namespace ProtoEngine {
+namespace Proto {
 
 struct Vertex {
     glm::vec3 position;
@@ -33,6 +33,6 @@ class MeshComponent : public Component {
     GLenum _ebo;
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif

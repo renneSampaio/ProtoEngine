@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace ProtoEngine {
+namespace Proto {
 
 class Shader;
 class Camera;
@@ -54,6 +54,6 @@ class Node {
     Shader* _shader;
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif

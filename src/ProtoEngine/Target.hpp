@@ -5,7 +5,7 @@
 
 #include "Viewport.hpp"
 
-namespace ProtoEngine {
+namespace Proto {
 
 class Target {
   protected:
@@ -27,6 +27,6 @@ class Target {
     virtual ~Target(){};
 };
 
-} // namespace ProtoEngine
+} // namespace Proto
 
 #endif
