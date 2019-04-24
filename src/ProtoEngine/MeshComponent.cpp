@@ -9,9 +9,6 @@ MeshComponent::MeshComponent(std::vector<Vertex> mesh,
     this->_mesh = mesh;
     this->_indices = indices;
 
-    std::cout << this->_mesh.size();
-    std::cout << this->_indices.size();
-
     glGenVertexArrays(1, &_vao);
     glGenBuffers(1, &_vbo);
     glGenBuffers(1, &_ebo);
