@@ -51,9 +51,7 @@ void Camera::calcProjection() {
 }
 
 void Camera::calcView() {
-    //    _view = glm::translate(glm::mat4(1.0f), (getNode()->getPosition()) *
-    //    -1.0f);
-    _view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f));
+    _view = glm::translate(glm::mat4(1.0f), (getNode()->getPosition()) * -1.0f);
 }
 
 } // namespace Proto
