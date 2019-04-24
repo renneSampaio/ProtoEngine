@@ -28,16 +28,20 @@ int main() {
 
     Node root;
     root.addComponent(&cam);
-
-    Node camera;
     root.setShader("shaders/test.vert", "shaders/test.frag");
 
-    Node quad;
-    quad.addComponent(mesh_component);
-    quad.setShader("shaders/test.vert", "shaders/test.frag");
-    quad.setPosition(0.0f, 0.0f, 10.0f);
+    Node cameraNode;
+    cameraNode.addComponent(&cam);
+    cameraNode.setShader("shaders/test.vert", "shaders/test.frag");
+    cameraNode.setPosition(0.0, 0.0, 10.0);
 
-    root.addChild(&quad);
+    Node quadNode;
+    quadNode.addComponent(mesh_component);
+    quadNode.setShader("shaders/test.vert", "shaders/test.frag");
+    quadNode.setPosition(0.0f, 0.0f, 0.0f);
+
+    root.addChild(&quadNode);
+    root.addChild(&cameraNode);
 
     engine->setRoot(&root);
     engine->setCamera(&cam);
