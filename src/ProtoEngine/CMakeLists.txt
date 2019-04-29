@@ -1,5 +1,6 @@
 add_library(ProtoEngine
     Engine.cpp
+    Scene.cpp
     Viewport.cpp
     Target.cpp
     Window.cpp
