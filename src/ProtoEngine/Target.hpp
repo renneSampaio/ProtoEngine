@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "Camera.hpp"
 #include "Viewport.hpp"
 
 namespace Proto {
@@ -10,19 +11,23 @@ namespace Proto {
 class Target {
   protected:
     std::vector<Viewport*> viewports;
+    Camera* _camera;
 
   public:
     void addViewport(Viewport* viewport) { viewports.push_back(viewport); }
 
-    std::vector<Viewport*>::const_iterator viewportsBegin() {
-        return viewports.cbegin();
-    }
+    std::vector<Viewport*> getViewports() { return viewports; }
 
-    std::vector<Viewport*>::const_iterator viewportsEnd() {
-        return viewports.cend();
-    }
+    int getWidth() const;
+    int getHeight() const;
+    int getAspectRatio() const;
+
+    void setWidth(int new_width);
+    void setHeight(int new_height);
+    void setDimension(int new_width, int new_height);
 
     virtual void makeCurrent() = 0;
+    virtual void swapBuffers() = 0;
 
     virtual ~Target(){};
 };
