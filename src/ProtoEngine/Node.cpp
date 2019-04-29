@@ -27,18 +27,19 @@ void Node::addComponent(Component* component) {
     _components.push_back(component);
 }
 
-void Node::setShader(std::string vs_path, std::string fs_path) {
-    _shader = new Shader(vs_path.c_str(), fs_path.c_str());
-}
+void Node::setShader(Shader* shader) { _shader = shader; }
 
-void Node::render(Camera& camera) {
-    _shader->Use();
+void Node::render(Camera* camera) {
+    if (_shader) {
+        _shader->Use();
+
+        GLuint modelLoc = glGetUniformLocation(_shader->program(), "model");
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(_model));
+
+        camera->setUniforms(_shader);
+    }
 
     calcModel();
-    GLuint modelLoc = glGetUniformLocation(_shader->program(), "model");
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(_model));
-
-    camera.setUniforms(_shader);
 
     for (auto& comp : _components) {
         comp->render();

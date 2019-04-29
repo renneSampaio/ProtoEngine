@@ -23,9 +23,9 @@ class Node {
     void addChild(Node* child);
     void addComponent(Component* component);
 
-    void setShader(std::string vs_path, std::string fs_path);
+    void setShader(Shader* shader);
 
-    void render(Camera& camera);
+    void render(Camera* camera);
 
     glm::vec3 getPosition() const;
     void setPosition(const glm::vec3& position);
