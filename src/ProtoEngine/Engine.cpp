@@ -19,7 +19,18 @@ Engine::Engine(std::string title, int x, int y, int width, int height) {
                   << "\n";
     }
 
-    _main_window = new Window{title, x, y, width, height};
+    Window* window = new Window{title, x, y, width, height};
+    _main_window = window;
+
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
+                        SDL_GL_CONTEXT_PROFILE_CORE);
+
+    _context = SDL_GL_CreateContext(_main_window->getSDLWindow());
+    SDL_GL_SetSwapInterval(1);
+
+    addTarget(window);
 
     glewExperimental = GL_TRUE;
     GLenum glew_status = glewInit();
@@ -32,6 +43,7 @@ Engine::Engine(std::string title, int x, int y, int width, int height) {
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
+    glEnable(GL_SCISSOR_TEST);
 }
 
 Engine::~Engine() { delete _main_window; }
@@ -54,23 +66,26 @@ void Engine::init(std::string title, int x, int y, int width, int height) {
     }
 }
 
+void Engine::addTarget(Target* target) { _targets.push_back(target); }
+
 Engine* Engine::getInstance() { return _instance; }
 
 void Engine::render() {
-    glViewport(0, 0, _main_window->getWidth(), _main_window->getHeight());
+    for (auto& target : _targets) {
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        target->makeCurrent();
 
-    if (!_root)
-        return;
+        for (auto& viewport : target->getViewports()) {
+            viewport->setup();
+            Camera* camera = viewport->getCamera();
+            Scene* scene = viewport->getScene();
 
-    if (!_camera)
-        return;
+            viewport->applyBackground();
+            scene->getRoot()->render(camera);
+        }
 
-    _root->render(*_camera);
-
-    _main_window->update();
+        target->swapBuffers();
+    }
 }
 
 void Engine::mainLoop() {

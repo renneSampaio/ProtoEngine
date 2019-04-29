@@ -2,6 +2,7 @@
 #define ENGINE_HEADER_
 
 #include <string>
+#include <vector>
 
 #include "Window.hpp"
 
@@ -31,6 +32,10 @@ class Engine {
     Window* getMainWindow() const;
     void setMainWindow(Window* main_window);
 
+    void addTarget(Target* target);
+
+    SDL_GLContext getContext() { return _context; };
+
     void mainLoop();
 
   private:
@@ -38,9 +43,11 @@ class Engine {
 
     static Engine* _instance;
 
+    std::vector<Target*> _targets;
     Node* _root;
     Camera* _camera;
     Window* _main_window;
+    SDL_GLContext _context;
 };
 
 } // namespace Proto
