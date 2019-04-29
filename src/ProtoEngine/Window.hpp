@@ -15,16 +15,10 @@ class Window : public Target {
     Window(std::string title, int width, int height);
     ~Window();
 
-    int getWidth() const;
-    int getHeight() const;
-    int getAspectRatio() const;
-
-    void setWidth(int new_width);
-    void setHeight(int new_height);
-    void setDimension(int new_width, int new_height);
-
     void makeCurrent() override;
-    void update();
+    void swapBuffers() override;
+
+    SDL_Window* getSDLWindow() { return _window; }
 
   private:
     std::string _title;
