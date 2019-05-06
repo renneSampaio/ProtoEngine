@@ -17,6 +17,7 @@ Engine::Engine(std::string title, int x, int y, int width, int height) {
     if (sdl_init_status < 0) {
         std::cout << "Failed to initialize SDL. Error: " << SDL_GetError()
                   << "\n";
+        std::exit(-1);
     }
 
     Window* window = new Window{title, x, y, width, height};
@@ -46,7 +47,7 @@ Engine::Engine(std::string title, int x, int y, int width, int height) {
     glEnable(GL_SCISSOR_TEST);
 }
 
-Engine::~Engine() { delete _main_window; }
+Engine::~Engine() {}
 
 Node* Engine::getRoot() const { return _root; }
 
@@ -80,8 +81,10 @@ void Engine::render() {
             Camera* camera = viewport->getCamera();
             Scene* scene = viewport->getScene();
 
+            camera->setAspect(viewport->getAspect());
+
             viewport->applyBackground();
-            scene->getRoot()->render(camera);
+            scene->getRoot()->render(*camera);
         }
 
         target->swapBuffers();
