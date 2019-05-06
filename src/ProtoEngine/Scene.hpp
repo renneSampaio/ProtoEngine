@@ -7,8 +7,6 @@ namespace Proto {
 
 class Scene {
   public:
-    void addChild(Node* child);
-
     Node* getRoot();
 
   private:
