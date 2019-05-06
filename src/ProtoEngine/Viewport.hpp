@@ -27,7 +27,7 @@ class Viewport {
         updateAspectRatio();
     }
 
-    inline int getAspect() const { return this->_aspect; }
+    inline float getAspect() const { return this->_aspect; }
 
     void setClearColor(float r, float g, float b, float a);
 
@@ -48,7 +48,7 @@ class Viewport {
     Scene* _scene;
 
     inline void updateAspectRatio() {
-        this->_aspect = _width / std::max(1, _height);
+        this->_aspect = ((float)_width) / std::max(1, _height);
     }
 };
 

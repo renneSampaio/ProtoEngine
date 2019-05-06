@@ -4,7 +4,7 @@ namespace Proto {
 
 int Target::getWidth() const { return viewports[0]->getWidth(); }
 int Target::getHeight() const { return viewports[0]->getHeight(); };
-int Target::getAspectRatio() const { return viewports[0]->getAspect(); };
+float Target::getAspectRatio() const { return viewports[0]->getAspect(); };
 
 void Target::setWidth(int new_width) { viewports[0]->setWidth(new_width); }
 

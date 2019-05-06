@@ -20,7 +20,7 @@ class Target {
 
     int getWidth() const;
     int getHeight() const;
-    int getAspectRatio() const;
+    float getAspectRatio() const;
 
     void setWidth(int new_width);
     void setHeight(int new_height);
