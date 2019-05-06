@@ -11,12 +11,12 @@ class Shader;
 
 class Camera : public Component {
   public:
-    Camera(float near, float far, float aspect, float fovy);
+    Camera(float near, float far, float fovy);
 
     void setUniforms(Shader* shader);
 
-    glm::mat4 getProjection();
-    glm::mat4 getView();
+    glm::mat4 getProjectionMatrix();
+    glm::mat4 getViewMatrix();
 
     void update() override{};
     void render() override{};
@@ -27,7 +27,6 @@ class Camera : public Component {
     float getFar() const;
     void setFar(float far);
 
-    float getAspect() const;
     void setAspect(float aspect);
 
     float getFovy() const;

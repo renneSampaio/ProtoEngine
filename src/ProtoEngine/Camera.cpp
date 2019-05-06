@@ -6,8 +6,8 @@
 
 namespace Proto {
 
-Camera::Camera(float near, float far, float aspect, float fovy)
-    : _near(near), _far(far), _aspect(aspect), _fovy(fovy) {}
+Camera::Camera(float near, float far, float fovy)
+    : _near(near), _far(far), _fovy(fovy) {}
 
 void Camera::setUniforms(Shader* shader) {
 
@@ -22,12 +22,12 @@ void Camera::setUniforms(Shader* shader) {
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(_projection));
 }
 
-glm::mat4 Camera::getProjection() {
+glm::mat4 Camera::getProjectionMatrix() {
     calcProjection();
     return _projection;
 }
 
-glm::mat4 Camera::getView() {
+glm::mat4 Camera::getViewMatrix() {
     calcView();
     return _view;
 }
@@ -40,11 +40,11 @@ float Camera::getFar() const { return _far; }
 
 void Camera::setFar(float far) { _far = far; }
 
-float Camera::getAspect() const { return _aspect; }
-
 float Camera::getFovy() const { return _fovy; }
 
 void Camera::setFovy(float fovy) { _fovy = fovy; }
+
+void Camera::setAspect(float aspect) { _aspect = aspect; }
 
 void Camera::calcProjection() {
     _projection = glm::perspective(glm::radians(_fovy), _aspect, _near, _far);
