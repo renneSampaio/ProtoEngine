@@ -18,14 +18,14 @@ class Node {
     Node();
     Node(Node* parent);
 
-    glm::mat4& getModel();
+    glm::mat4& getModelMatrix();
 
     void addChild(Node* child);
     void addComponent(Component* component);
 
     void setShader(Shader* shader);
 
-    void render(Camera* camera);
+    void render(Camera& camera);
 
     glm::vec3 getPosition() const;
     void setPosition(const glm::vec3& position);
@@ -56,6 +56,14 @@ class Node {
     std::vector<Component*> _components;
 
     Shader* _shader = nullptr;
+};
+
+class NodeFactory {
+  public:
+    static Node* CreateCamera(float near = 1.0f, float far = 1000.0f,
+                              float fovy = 90.0f);
+    static Node* CreateQuad(int width, int height);
+    static Node* CreateCube(int width, int height, int lenght);
 };
 
 } // namespace Proto

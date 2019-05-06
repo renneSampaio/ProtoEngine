@@ -33,6 +33,12 @@ class MeshComponent : public Component {
     GLenum _ebo;
 };
 
+class MeshComponentFactory {
+  public:
+    static MeshComponent* CreateQuad(int width, int height);
+    static MeshComponent* CreateCube(int width, int height, int lenght);
+};
+
 } // namespace Proto
 
 #endif

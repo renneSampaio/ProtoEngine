@@ -2,6 +2,8 @@
 
 #include "Camera.hpp"
 #include "Component.hpp"
+#include "Engine.hpp"
+#include "MeshComponent.hpp"
 #include "Shader.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -12,7 +14,7 @@ namespace Proto {
 Node::Node() : _parent(nullptr) {}
 Node::Node(Node* parent) : _parent(parent) { _parent->addChild(this); }
 
-glm::mat4 Node::getModel() {
+glm::mat4& Node::getModelMatrix() {
     calcModel();
     return _model;
 }
@@ -29,14 +31,14 @@ void Node::addComponent(Component* component) {
 
 void Node::setShader(Shader* shader) { _shader = shader; }
 
-void Node::render(Camera* camera) {
+void Node::render(Camera& camera) {
     if (_shader) {
         _shader->Use();
 
         GLuint modelLoc = glGetUniformLocation(_shader->program(), "model");
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(_model));
 
-        camera->setUniforms(_shader);
+        camera.setUniforms(_shader);
     }
 
     calcModel();
@@ -97,8 +99,33 @@ void Node::calcModel() {
     _model = glm::scale(_model, _scale);
 
     if (_parent != nullptr) {
-        _model = _parent->getModel() * _model;
+        _model = _parent->getModelMatrix() * _model;
     }
+}
+
+Node* NodeFactory::CreateCamera(float near, float far, float fovy) {
+    Node* cameraNode = new Node();
+    Camera* cam = new Camera(near, far, fovy);
+    cameraNode->addComponent(cam);
+
+    return cameraNode;
+}
+
+Node* NodeFactory::CreateQuad(int width, int height) {
+    Node* quadNode = new Node();
+    quadNode->addComponent(MeshComponentFactory::CreateQuad(width, height));
+    quadNode->setPosition(0.0f, 0.0f, 0.0f);
+
+    return quadNode;
+}
+
+Node* NodeFactory::CreateCube(int width, int height, int lenght) {
+    Node* cubeNode = new Node();
+    cubeNode->addComponent(
+        MeshComponentFactory::CreateCube(width, height, lenght));
+    cubeNode->setPosition(0.0f, 0.0f, 0.0f);
+
+    return cubeNode;
 }
 
 } // namespace Proto
