@@ -40,7 +40,7 @@ class Viewport {
   private:
     int _x, _y;
     int _width, _height;
-    int _aspect;
+    float _aspect;
 
     glm::vec4 _clearColor;
 
