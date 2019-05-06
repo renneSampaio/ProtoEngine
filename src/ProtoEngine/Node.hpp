@@ -62,8 +62,8 @@ class NodeFactory {
   public:
     static Node* CreateCamera(float near = 1.0f, float far = 1000.0f,
                               float fovy = 90.0f);
-    static Node* CreateQuad(int width, int height);
-    static Node* CreateCube(int width, int height, int lenght);
+    static Node* CreateQuad(float width, float height);
+    static Node* CreateCube(float width, float height, float lenght);
 };
 
 } // namespace Proto

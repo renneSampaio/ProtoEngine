@@ -35,8 +35,8 @@ class MeshComponent : public Component {
 
 class MeshComponentFactory {
   public:
-    static MeshComponent* CreateQuad(int width, int height);
-    static MeshComponent* CreateCube(int width, int height, int lenght);
+    static MeshComponent* CreateQuad(float width, float height);
+    static MeshComponent* CreateCube(float width, float height, float lenght);
 };
 
 } // namespace Proto

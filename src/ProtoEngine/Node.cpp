@@ -111,7 +111,7 @@ Node* NodeFactory::CreateCamera(float near, float far, float fovy) {
     return cameraNode;
 }
 
-Node* NodeFactory::CreateQuad(int width, int height) {
+Node* NodeFactory::CreateQuad(float width, float height) {
     Node* quadNode = new Node();
     quadNode->addComponent(MeshComponentFactory::CreateQuad(width, height));
     quadNode->setPosition(0.0f, 0.0f, 0.0f);
@@ -119,7 +119,7 @@ Node* NodeFactory::CreateQuad(int width, int height) {
     return quadNode;
 }
 
-Node* NodeFactory::CreateCube(int width, int height, int lenght) {
+Node* NodeFactory::CreateCube(float width, float height, float lenght) {
     Node* cubeNode = new Node();
     cubeNode->addComponent(
         MeshComponentFactory::CreateCube(width, height, lenght));

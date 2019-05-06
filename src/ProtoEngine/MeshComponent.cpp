@@ -40,7 +40,7 @@ void MeshComponent::render() {
     glDrawElements(GL_TRIANGLES, _indices.size(), GL_UNSIGNED_INT, nullptr);
 }
 
-MeshComponent* MeshComponentFactory::CreateQuad(int width, int height) {
+MeshComponent* MeshComponentFactory::CreateQuad(float width, float height) {
 
     glm::vec3 scalevec = glm::vec3(width / 2.0, height / 2.0, 1.0);
 
@@ -57,8 +57,8 @@ MeshComponent* MeshComponentFactory::CreateQuad(int width, int height) {
     return new MeshComponent(mesh, indices);
 }
 
-MeshComponent* MeshComponentFactory::CreateCube(int width, int height,
-                                                int lenght) {
+MeshComponent* MeshComponentFactory::CreateCube(float width, float height,
+                                                float lenght) {
 
     glm::vec3 scalevec = glm::vec3(width / 2.0, height / 2.0, lenght / 2.0);
 
@@ -70,7 +70,7 @@ MeshComponent* MeshComponentFactory::CreateCube(int width, int height,
         {glm::vec3(-1.0f, 1.0f, -1.0f) * scalevec, glm::vec2(0.0, 1.0)},
 
         {glm::vec3(-1.0f, 1.0f, 1.0f) * scalevec, glm::vec2(0.0, 0.0)}, //..
-        {glm::vec3(1.0f, 1.0f, 0.0f) * scalevec, glm::vec2(1.0, 0.0)},  //..
+        {glm::vec3(1.0f, 1.0f, 1.0f) * scalevec, glm::vec2(1.0, 0.0)},  //..
 
         {glm::vec3(1.0f, -1.0f, 1.0f) * scalevec, glm::vec2(1.0, 1.0)}, //..
         {glm::vec3(-1.0f, -1.0f, 1.0f) * scalevec, glm::vec2(0.0, 1.0)}};
@@ -87,6 +87,7 @@ MeshComponent* MeshComponentFactory::CreateCube(int width, int height,
                               5, 6, 7, //
                               0, 7, 6, // face bottom
                               0, 6, 1};
+
     return new MeshComponent(mesh, indices);
 };
 
