@@ -18,7 +18,7 @@ class Node {
     Node();
     Node(Node* parent);
 
-    glm::mat4 getModel();
+    glm::mat4& getModel();
 
     void addChild(Node* child);
     void addComponent(Component* component);
@@ -55,7 +55,7 @@ class Node {
     std::vector<Node*> _children;
     std::vector<Component*> _components;
 
-    Shader* _shader;
+    Shader* _shader = nullptr;
 };
 
 } // namespace Proto
