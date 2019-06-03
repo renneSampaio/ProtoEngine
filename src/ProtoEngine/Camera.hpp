@@ -3,46 +3,44 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Component.hpp"
+#include "ProtoTypes.hpp"
 
 namespace Proto {
 
-class Shader;
-
 class Camera : public Component {
   public:
-    Camera(float near, float far, float fovy);
+    Camera(Float near, Float far, Float fovy);
 
     void setUniforms(Shader* shader);
 
-    glm::mat4 getProjectionMatrix();
-    glm::mat4 getViewMatrix();
+    Mat4& getProjectionMatrix();
+    Mat4& getViewMatrix();
 
     void update() override{};
     void render() override{};
 
-    float getNear() const;
+    Float getNear() const;
     void setNear(float near);
 
-    float getFar() const;
+    Float getFar() const;
     void setFar(float far);
 
     void setAspect(float aspect);
 
-    float getFovy() const;
+    Float getFovy() const;
     void setFovy(float fovy);
 
   private:
     void calcProjection();
     void calcView();
 
-    float _near;
-    float _far;
-    float _aspect;
-    float _fovy;
+    Float _near;
+    Float _far;
+    Float _aspect;
+    Float _fovy;
 
-    glm::mat4 _view;
-    glm::mat4 _projection;
+    Mat4 _view;
+    Mat4 _projection;
 };
 
 } // namespace Proto

@@ -16,7 +16,7 @@ Node::Node(Node* parent) : _parent(parent), _children(), _components() {
         _parent->addChild(this);
 }
 
-const glm::mat4& Node::getModelMatrix() const {
+const Mat4& Node::getModelMatrix() const {
     _calcModel();
     return _model;
 }
@@ -54,31 +54,31 @@ void Node::render(Camera& camera) {
     }
 }
 
-glm::vec3 Node::getPosition() const { return _position; }
+Vec3 Node::getPosition() const { return _position; }
 
-void Node::setPosition(const glm::vec3& position) { _position = position; }
+void Node::setPosition(const Vec3& position) { _position = position; }
 
-void Node::setPosition(float x, float y, float z) {
+void Node::setPosition(Float x, Float y, Float z) {
     _position.x = x;
     _position.y = y;
     _position.z = z;
 }
 
-glm::vec3 Node::getRotation() const { return _rotation; }
+Vec3 Node::getRotation() const { return _rotation; }
 
-void Node::setRotation(const glm::vec3& rotation) { _rotation = rotation; }
+void Node::setRotation(const Vec3& rotation) { _rotation = rotation; }
 
-void Node::setRotation(float x, float y, float z) {
+void Node::setRotation(Float x, Float y, Float z) {
     _rotation.x = x;
     _rotation.y = y;
     _rotation.z = z;
 }
 
-glm::vec3 Node::getScale() const { return _scale; }
+Vec3 Node::getScale() const { return _scale; }
 
-void Node::setScale(const glm::vec3& scale) { _scale = scale; }
+void Node::setScale(const Vec3& scale) { _scale = scale; }
 
-void Node::setScale(float x, float y, float z) {
+void Node::setScale(Float x, Float y, Float z) {
     _scale.x = x;
     _scale.y = y;
     _scale.z = z;
@@ -89,15 +89,15 @@ Node* Node::getParent() const { return _parent; }
 void Node::setParent(Node* parent) { _parent = parent; }
 
 void Node::_calcModel() const {
-    _model = glm::mat4(1.0f);
+    _model = Mat4(1.0f);
 
     _model = glm::translate(_model, _position);
-    _model = glm::rotate(_model, glm::radians(_rotation.x),
-                         glm::vec3(1.0, 0.0, 0.0));
-    _model = glm::rotate(_model, glm::radians(_rotation.y),
-                         glm::vec3(0.0, 1.0, 0.0));
-    _model = glm::rotate(_model, glm::radians(_rotation.z),
-                         glm::vec3(0.0, 0.0, 1.0));
+    _model =
+        glm::rotate(_model, glm::radians(_rotation.x), Vec3(1.0, 0.0, 0.0));
+    _model =
+        glm::rotate(_model, glm::radians(_rotation.y), Vec3(0.0, 1.0, 0.0));
+    _model =
+        glm::rotate(_model, glm::radians(_rotation.z), Vec3(0.0, 0.0, 1.0));
     _model = glm::scale(_model, _scale);
 
     if (_parent != nullptr) {
@@ -105,7 +105,7 @@ void Node::_calcModel() const {
     }
 }
 
-Node* NodeFactory::CreateCamera(float near, float far, float fovy) {
+Node* NodeFactory::CreateCamera(Float near, Float far, Float fovy) {
     Node* cameraNode = new Node();
     Camera* cam = new Camera(near, far, fovy);
     cameraNode->addComponent(cam);
@@ -113,7 +113,7 @@ Node* NodeFactory::CreateCamera(float near, float far, float fovy) {
     return cameraNode;
 }
 
-Node* NodeFactory::CreateQuad(float width, float height) {
+Node* NodeFactory::CreateQuad(Float width, Float height) {
     Node* quadNode = new Node();
     quadNode->addComponent(MeshComponentFactory::CreateQuad(width, height));
     quadNode->setPosition(0.0f, 0.0f, 0.0f);
@@ -121,7 +121,7 @@ Node* NodeFactory::CreateQuad(float width, float height) {
     return quadNode;
 }
 
-Node* NodeFactory::CreateCube(float width, float height, float lenght) {
+Node* NodeFactory::CreateCube(Float width, Float height, Float lenght) {
     Node* cubeNode = new Node();
     cubeNode->addComponent(
         MeshComponentFactory::CreateCube(width, height, lenght));

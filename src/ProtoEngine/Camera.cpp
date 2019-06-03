@@ -22,12 +22,12 @@ void Camera::setUniforms(Shader* shader) {
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(_projection));
 }
 
-glm::mat4 Camera::getProjectionMatrix() {
+Mat4& Camera::getProjectionMatrix() {
     calcProjection();
     return _projection;
 }
 
-glm::mat4 Camera::getViewMatrix() {
+Mat4& Camera::getViewMatrix() {
     calcView();
     return _view;
 }

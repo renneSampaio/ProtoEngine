@@ -6,18 +6,19 @@
 #include <string>
 #include <vector>
 
+#include "ProtoTypes.hpp"
+
 namespace Proto {
 
 class Shader;
 class Camera;
-
 class Component;
 
 class Node {
   public:
     Node(Node* parent = nullptr);
 
-    const glm::mat4& getModelMatrix() const;
+    const Mat4& getModelMatrix() const;
 
     void addChild(Node* child);
     void addComponent(Component* component);
@@ -26,17 +27,17 @@ class Node {
 
     void render(Camera& camera);
 
-    glm::vec3 getPosition() const;
-    void setPosition(const glm::vec3& position);
-    void setPosition(float x, float y, float z);
+    Vec3 getPosition() const;
+    void setPosition(const Vec3& position);
+    void setPosition(Float x, Float y, Float z);
 
-    glm::vec3 getRotation() const;
-    void setRotation(const glm::vec3& rotation);
-    void setRotation(float x, float y, float z);
+    Vec3 getRotation() const;
+    void setRotation(const Vec3& rotation);
+    void setRotation(Float x, Float y, Float z);
 
-    glm::vec3 getScale() const;
-    void setScale(const glm::vec3& scale);
-    void setScale(float x, float y, float z);
+    Vec3 getScale() const;
+    void setScale(const Vec3& scale);
+    void setScale(Float x, Float y, Float z);
 
     Node* getParent() const;
     void setParent(Node* parent);
@@ -44,12 +45,12 @@ class Node {
   private:
     void _calcModel() const;
 
-    glm::vec3 _position = glm::vec3(0.0);
-    glm::vec3 _rotation = glm::vec3(0.0);
-    glm::vec3 _scale = glm::vec3(1.0f);
+    Vec3 _position = Vec3(0.0);
+    Vec3 _rotation = Vec3(0.0);
+    Vec3 _scale = Vec3(1.0f);
 
     // mutable to override constness in method
-    mutable glm::mat4 _model = glm::mat4(1.0f);
+    mutable Mat4 _model = Mat4(1.0f);
 
     Node* _parent = nullptr;
     std::vector<Node*> _children;
@@ -60,10 +61,10 @@ class Node {
 
 class NodeFactory {
   public:
-    static Node* CreateCamera(float near = 1.0f, float far = 1000.0f,
-                              float fovy = 90.0f);
-    static Node* CreateQuad(float width, float height);
-    static Node* CreateCube(float width, float height, float lenght);
+    static Node* CreateCamera(Float near = 1.0f, Float far = 1000.0f,
+                              Float fovy = 90.0f);
+    static Node* CreateQuad(Float width, Float height);
+    static Node* CreateCube(Float width, Float height, Float lenght);
 };
 
 } // namespace Proto

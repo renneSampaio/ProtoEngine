@@ -6,8 +6,8 @@
 
 namespace Proto {
 
-Viewport::Viewport(int width, int height) : Viewport(0, 0, width, height){};
-Viewport::Viewport(int x, int y, int width, int height)
+Viewport::Viewport(Int width, Int height) : Viewport(0, 0, width, height){};
+Viewport::Viewport(Int x, Int y, Int width, Int height)
     : _x(x), _y(y), _width(width), _height(height) {
     updateAspectRatio();
 }
@@ -22,7 +22,7 @@ void Viewport::applyBackground() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Viewport::setClearColor(float r, float g, float b, float a) {
+void Viewport::setClearColor(Float r, Float g, Float b, Float a) {
     _clearColor.r = r;
     _clearColor.g = g;
     _clearColor.b = b;

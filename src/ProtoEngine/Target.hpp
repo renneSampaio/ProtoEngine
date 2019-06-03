@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "ProtoTypes.hpp"
+
 #include "Camera.hpp"
 #include "Viewport.hpp"
 
@@ -18,13 +20,13 @@ class Target {
 
     std::vector<Viewport*> getViewports() { return viewports; }
 
-    int getWidth() const;
-    int getHeight() const;
-    float getAspectRatio() const;
+    Int getWidth() const;
+    Int getHeight() const;
+    Float getAspectRatio() const;
 
-    void setWidth(int new_width);
-    void setHeight(int new_height);
-    void setDimension(int new_width, int new_height);
+    void setWidth(Int new_width);
+    void setHeight(Int new_height);
+    void setDimension(Int new_width, Int new_height);
 
     virtual void makeCurrent() = 0;
     virtual void swapBuffers() = 0;
