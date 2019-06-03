@@ -11,11 +11,13 @@
 
 namespace Proto {
 
-Node::Node() : _parent(nullptr) {}
-Node::Node(Node* parent) : _parent(parent) { _parent->addChild(this); }
+Node::Node(Node* parent) : _parent(parent), _children(), _components() {
+    if (_parent)
+        _parent->addChild(this);
+}
 
-glm::mat4& Node::getModelMatrix() {
-    calcModel();
+const glm::mat4& Node::getModelMatrix() const {
+    _calcModel();
     return _model;
 }
 
@@ -41,7 +43,7 @@ void Node::render(Camera& camera) {
         camera.setUniforms(_shader);
     }
 
-    calcModel();
+    _calcModel();
 
     for (auto& comp : _components) {
         comp->render();
@@ -86,7 +88,7 @@ Node* Node::getParent() const { return _parent; }
 
 void Node::setParent(Node* parent) { _parent = parent; }
 
-void Node::calcModel() {
+void Node::_calcModel() const {
     _model = glm::mat4(1.0f);
 
     _model = glm::translate(_model, _position);

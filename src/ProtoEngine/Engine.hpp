@@ -43,6 +43,8 @@ class Engine {
 
     static Engine* _instance;
 
+    static void _quitEngine();
+
     std::vector<Target*> _targets;
     Node* _root;
     Camera* _camera;

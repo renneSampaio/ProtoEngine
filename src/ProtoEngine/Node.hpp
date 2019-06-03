@@ -15,10 +15,9 @@ class Component;
 
 class Node {
   public:
-    Node();
-    Node(Node* parent);
+    Node(Node* parent = nullptr);
 
-    glm::mat4& getModelMatrix();
+    const glm::mat4& getModelMatrix() const;
 
     void addChild(Node* child);
     void addComponent(Component* component);
@@ -43,13 +42,14 @@ class Node {
     void setParent(Node* parent);
 
   private:
-    void calcModel();
+    void _calcModel() const;
 
     glm::vec3 _position = glm::vec3(0.0);
     glm::vec3 _rotation = glm::vec3(0.0);
     glm::vec3 _scale = glm::vec3(1.0f);
 
-    glm::mat4 _model;
+    // mutable to override constness in method
+    mutable glm::mat4 _model = glm::mat4(1.0f);
 
     Node* _parent = nullptr;
     std::vector<Node*> _children;

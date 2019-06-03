@@ -10,6 +10,12 @@
 #include "Window.hpp"
 
 namespace Proto {
+
+void Engine::_quitEngine() {
+    delete _instance;
+    _instance = nullptr;
+}
+
 Engine* Engine::_instance = nullptr;
 
 Engine::Engine(std::string title, int x, int y, int width, int height) {
@@ -64,6 +70,7 @@ void Engine::setMainWindow(Window* main_window) { _main_window = main_window; }
 void Engine::init(std::string title, int x, int y, int width, int height) {
     if (!_instance) {
         _instance = new Engine(title, x, y, width, height);
+        ::atexit(_quitEngine);
     }
 }
 
@@ -107,6 +114,7 @@ void Engine::mainLoop() {
     quit();
 }
 
+// Kill all components
 void Engine::quit() { SDL_Quit(); }
 
 } // namespace Proto
