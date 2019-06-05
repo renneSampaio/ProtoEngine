@@ -8,13 +8,15 @@
 #include <glm/vec3.hpp>
 #include <vector>
 
+#include "ProtoTypes.hpp"
+
 #include "Component.hpp"
 
 namespace Proto {
 
 struct Vertex {
-    glm::vec3 position;
-    glm::vec2 uv;
+    Vec3 position;
+    Vec2 uv;
 };
 
 class MeshComponent : public Component {

@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "ProtoTypes.hpp"
+
 #include "Window.hpp"
 
 namespace Proto {
@@ -14,7 +16,7 @@ class Camera;
 class Engine {
   private:
   public:
-    static void init(std::string title, int x, int y, int width, int height);
+    static void init(std::string title, Int x, Int y, Int width, Int height);
     static void quit();
 
     static Engine* getInstance();
@@ -39,7 +41,7 @@ class Engine {
     void mainLoop();
 
   private:
-    Engine(std::string title, int x, int y, int width, int height);
+    Engine(std::string title, Int x, Int y, Int width, Int height);
 
     static Engine* _instance;
 

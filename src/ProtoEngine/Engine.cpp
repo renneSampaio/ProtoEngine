@@ -18,7 +18,7 @@ void Engine::_quitEngine() {
 
 Engine* Engine::_instance = nullptr;
 
-Engine::Engine(std::string title, int x, int y, int width, int height) {
+Engine::Engine(std::string title, Int x, Int y, Int width, Int height) {
     auto sdl_init_status = SDL_Init(SDL_INIT_EVERYTHING);
     if (sdl_init_status < 0) {
         std::cout << "Failed to initialize SDL. Error: " << SDL_GetError()
@@ -67,7 +67,7 @@ Window* Engine::getMainWindow() const { return _main_window; }
 
 void Engine::setMainWindow(Window* main_window) { _main_window = main_window; }
 
-void Engine::init(std::string title, int x, int y, int width, int height) {
+void Engine::init(std::string title, Int x, Int y, Int width, Int height) {
     if (!_instance) {
         _instance = new Engine(title, x, y, width, height);
         ::atexit(_quitEngine);

@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <set>
+#include <string>
 #include <vector>
 
 #include "Component.hpp"
@@ -29,6 +30,8 @@ using Mat4 = glm::mat4;
 
 using Float = float;
 using Int = int32_t;
+
+using String = std::string;
 
 } // namespace Proto
 
