@@ -5,6 +5,7 @@ add_library(ProtoEngine
     Target.cpp
     Window.cpp
     Component.cpp
+    Material.cpp
     Camera.cpp
     Node.cpp
     MeshComponent.cpp
