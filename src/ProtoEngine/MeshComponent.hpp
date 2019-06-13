@@ -14,11 +14,6 @@
 
 namespace Proto {
 
-struct Vertex {
-    Vec3 position;
-    Vec2 uv;
-};
-
 class MeshComponent : public Component {
   public:
     MeshComponent(std::vector<Vertex> _mesh, std::vector<uint> _indices);
