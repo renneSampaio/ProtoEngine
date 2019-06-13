@@ -2,6 +2,8 @@ add_library(ProtoEngine
     Engine.cpp
     Scene.cpp
     Viewport.cpp
+    IndexBuffer.cpp
+    VertexBuffer.cpp
     Target.cpp
     Window.cpp
     Component.cpp
