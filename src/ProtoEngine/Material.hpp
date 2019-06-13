@@ -8,11 +8,17 @@ namespace Proto {
 class Material {
   public:
     Material(Shader* shader);
+    Material();
     virtual ~Material();
 
     void setProperty(String name, Float& value);
+
     void setProperty(String name, Vec3& value);
+    void setProperty(String name, Float x, Float y, Float z);
+
     void setProperty(String name, Vec4& value);
+    void setProperty(String name, Float x, Float y, Float z, Float w);
+
     void setProperty(String name, Mat4& value);
 
     void setShader(Shader* shader);

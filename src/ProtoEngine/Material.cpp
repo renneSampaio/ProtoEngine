@@ -18,6 +18,15 @@ Shader* Material::getShader() { return _shader; };
 void Material::setProperty(String name, Vec3& value) {
     glUniform3fv(getLocation(name), 1, glm::value_ptr(value));
 }
+
+void Material::setProperty(String name, Float x, Float y, Float z) {
+    glUniform3f(getLocation(name), x, y, z);
+}
+
+void Material::setProperty(String name, Float x, Float y, Float z, Float w) {
+    glUniform4f(getLocation(name), x, y, z, w);
+}
+
 void Material::setProperty(String name, Vec4& value) {
     glUniform4fv(getLocation(name), 1, glm::value_ptr(value));
 }
@@ -26,7 +35,6 @@ GLuint Material::getLocation(String name) {
     if (_shader) {
         return glGetUniformLocation(_shader->program(), name.c_str());
     }
-
     return -1;
 }
 
