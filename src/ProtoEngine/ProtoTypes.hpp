@@ -29,9 +29,15 @@ using Vec4 = glm::vec4;
 using Mat4 = glm::mat4;
 
 using Float = float;
+using Uint = uint32_t;
 using Int = int32_t;
 
 using String = std::string;
+
+struct Vertex {
+    Vec3 position;
+    Vec2 uv;
+};
 
 } // namespace Proto
 
