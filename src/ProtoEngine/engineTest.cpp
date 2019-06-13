@@ -15,7 +15,7 @@ int main() {
 
     Camera cam(0.01f, 100.0f, 90.0f);
 
-    Shader shader("shaders/test.vert", "shaders/test.frag");
+    Shader shader("shaders/default.vert", "shaders/default.frag");
 
     Node cameraNode;
     cameraNode.addComponent(&cam);
