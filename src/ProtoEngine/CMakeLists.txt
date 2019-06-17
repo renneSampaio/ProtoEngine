@@ -11,6 +11,8 @@ add_library(ProtoEngine
     Camera.cpp
     Node.cpp
     MeshComponent.cpp
+    MeshComponentFactory.cpp
+    NodeFactory.cpp
     Shader.cpp
     )
 

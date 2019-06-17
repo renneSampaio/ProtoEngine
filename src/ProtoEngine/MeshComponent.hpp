@@ -17,6 +17,7 @@ namespace Proto {
 class MeshComponent : public Component {
   public:
     MeshComponent(std::vector<Vertex> _mesh, std::vector<uint> _indices);
+    virtual ~MeshComponent(){};
 
     std::vector<Vertex> _mesh;
     std::vector<uint> _indices;
@@ -28,12 +29,6 @@ class MeshComponent : public Component {
     GLenum _vao;
     GLenum _vbo;
     GLenum _ebo;
-};
-
-class MeshComponentFactory {
-  public:
-    static MeshComponent* CreateQuad(float width, float height);
-    static MeshComponent* CreateCube(float width, float height, float lenght);
 };
 
 } // namespace Proto

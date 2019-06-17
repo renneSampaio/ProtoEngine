@@ -60,14 +60,6 @@ class Node {
     Material* _material = nullptr;
 };
 
-class NodeFactory {
-  public:
-    static Node* CreateCamera(Float near = 1.0f, Float far = 1000.0f,
-                              Float fovy = 90.0f);
-    static Node* CreateQuad(Float width, Float height);
-    static Node* CreateCube(Float width, Float height, Float lenght);
-};
-
 } // namespace Proto
 
 #endif

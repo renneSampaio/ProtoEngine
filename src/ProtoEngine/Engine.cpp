@@ -9,9 +9,16 @@
 #include "Node.hpp"
 #include "Window.hpp"
 
+#include "MeshComponentFactory.hpp"
+#include "NodeFactory.hpp"
+
 namespace Proto {
 
 void Engine::_quitEngine() {
+
+    NodeFactory::clearAll();
+    MeshComponentFactory::clearAll();
+
     delete _instance;
     _instance = nullptr;
 }

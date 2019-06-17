@@ -3,6 +3,7 @@
 #include "Material.hpp"
 #include "MeshComponent.hpp"
 #include "Node.hpp"
+#include "NodeFactory.hpp"
 #include "Scene.hpp"
 #include "Shader.hpp"
 
@@ -26,13 +27,11 @@ int main() {
     Node* quadNode = NodeFactory::CreateQuad(5.0f, 5.0f);
     quadNode->setPosition(0, 3, 0);
     quadNode->setRotation(0, 45, 0);
-    //    quadNode->setShader(&shader);
     quadNode->setMaterial(&mat);
 
     Node* cubeNode = NodeFactory::CreateCube(5, 5, 5);
     cubeNode->setPosition(0, -3, 0);
     cubeNode->setRotation(45, 45, 0);
-    //    cubeNode->setShader(&shader);
     cubeNode->setMaterial(&mat);
 
     Scene scene;
