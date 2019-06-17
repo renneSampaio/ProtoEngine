@@ -7,9 +7,9 @@ namespace Proto {
 
 class Material {
   public:
-    Material(Shader* shader);
     Material();
-    virtual ~Material();
+    Material(Shader* shader);
+    virtual ~Material(){};
 
     void setProperty(const String& name, Float value);
 
@@ -23,6 +23,8 @@ class Material {
 
     void setShader(Shader* shader);
     Shader* getShader() const;
+
+    void use();
 
   private:
     Shader* _shader = nullptr;

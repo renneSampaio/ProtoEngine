@@ -6,6 +6,8 @@
 #include "MeshComponent.hpp"
 #include "Shader.hpp"
 
+#include "Material.hpp"
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -31,18 +33,14 @@ void Node::addComponent(Component* component) {
     _components.push_back(component);
 }
 
-void Node::setShader(Shader* shader) { _shader = shader; }
+void Node::setMaterial(Material* material) { _material = material; }
 
 void Node::render(Camera& camera) {
-    if (_shader) {
-        _shader->Use();
-
-        GLuint modelLoc = glGetUniformLocation(_shader->program(), "model");
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(_model));
-
-        camera.setUniforms(_shader);
+    if (_material) {
+        _material->use();
+        _material->setProperty("model", _model);
+        camera.setUniforms(_material->getShader());
     }
-
     _calcModel();
 
     for (auto& comp : _components) {

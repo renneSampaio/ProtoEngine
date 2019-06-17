@@ -2,6 +2,8 @@
 
 namespace Proto {
 
+Material::Material() {}
+
 Material::Material(Shader* shader) : _shader(shader) {}
 
 void Material::setProperty(const String& name, Float value) {
@@ -13,7 +15,12 @@ void Material::setProperty(const String& name, Mat4& value) {
 
 void Material::setShader(Shader* shader) { _shader = shader; }
 
-Shader* Material::getShader() const { return _shader; };
+Shader* Material::getShader() const { return _shader; }
+
+void Material::use() {
+    if (_shader)
+        _shader->Use();
+};
 
 void Material::setProperty(const String& name, Vec3& value) {
     glUniform3fv(getLocation(name), 1, glm::value_ptr(value));

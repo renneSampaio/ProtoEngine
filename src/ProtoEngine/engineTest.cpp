@@ -1,5 +1,6 @@
 #include "Engine.hpp"
 #include "Camera.hpp"
+#include "Material.hpp"
 #include "MeshComponent.hpp"
 #include "Node.hpp"
 #include "Scene.hpp"
@@ -16,6 +17,7 @@ int main() {
     Camera cam(0.01f, 100.0f, 90.0f);
 
     Shader shader("shaders/default.vert", "shaders/default.frag");
+    Material mat(&shader);
 
     Node cameraNode;
     cameraNode.addComponent(&cam);
@@ -24,12 +26,14 @@ int main() {
     Node* quadNode = NodeFactory::CreateQuad(5.0f, 5.0f);
     quadNode->setPosition(0, 3, 0);
     quadNode->setRotation(0, 45, 0);
-    quadNode->setShader(&shader);
+    //    quadNode->setShader(&shader);
+    quadNode->setMaterial(&mat);
 
     Node* cubeNode = NodeFactory::CreateCube(5, 5, 5);
     cubeNode->setPosition(0, -3, 0);
     cubeNode->setRotation(45, 45, 0);
-    cubeNode->setShader(&shader);
+    //    cubeNode->setShader(&shader);
+    cubeNode->setMaterial(&mat);
 
     Scene scene;
     scene.getRoot()->addChild(&cameraNode);

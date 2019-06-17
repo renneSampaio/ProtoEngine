@@ -11,6 +11,7 @@
 namespace Proto {
 
 class Shader;
+class Material;
 class Camera;
 class Component;
 
@@ -23,7 +24,7 @@ class Node {
     void addChild(Node* child);
     void addComponent(Component* component);
 
-    void setShader(Shader* shader);
+    void setMaterial(Material* material);
 
     void render(Camera& camera);
 
@@ -56,7 +57,7 @@ class Node {
     std::vector<Node*> _children;
     std::vector<Component*> _components;
 
-    Shader* _shader = nullptr;
+    Material* _material = nullptr;
 };
 
 class NodeFactory {
